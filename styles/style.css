@@ -1,0 +1,519 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+:root{
+    --navy:#1f2937;
+    --blue:#2563eb;
+    --blue-dark:#1d4ed8;
+    --green:#15803d;
+    --green-bg:#dcfce7;
+    --red:#dc2626;
+    --red-bg:#fee2e2;
+    --grey-bg:#f4f4f6;
+    --card-bg:#ffffff;
+    --border:#e2e4e9;
+    --header-h:auto;
+}
+
+html{
+    /* prevents iOS/Android from auto-zooming text and
+       keeps rem-based sizing consistent at every width */
+    -webkit-text-size-adjust:100%;
+}
+
+body{
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+    background:var(--grey-bg);
+    color:#1f2430;
+    line-height:1.6;
+    /* stops any single wide element (like a long table)
+       from forcing the whole page to scroll sideways */
+    overflow-x:hidden;
+    width:100%;
+}
+
+img, table, input, select, button{
+    max-width:100%;
+}
+
+
+/* Skip Link */
+.skip-link{
+    position:absolute;
+    left:-9999px;
+}
+
+.skip-link:focus{
+    left:10px;
+    top:10px;
+    background:white;
+    padding:10px;
+    z-index:100;
+    border-radius:6px;
+    box-shadow:0 2px 8px rgba(0,0,0,0.2);
+}
+
+
+/* visually hidden but still readable by screen readers */
+.sr-only{
+    position:absolute;
+    width:1px;
+    height:1px;
+    overflow:hidden;
+    clip:rect(0,0,0,0);
+    white-space:nowrap;
+}
+
+
+/* Header — sticky at the top, height adjusts naturally to content
+   so we never have to guess a fixed pixel number */
+header{
+    background:var(--navy);
+    color:white;
+    padding:0.7rem 1rem;
+    position:sticky;
+    top:0;
+    z-index:50;
+    box-shadow:0 2px 8px rgba(0,0,0,0.15);
+    width:100%;
+}
+
+header h1{
+    text-align:center;
+    font-size:clamp(1.05rem, 4vw, 1.4rem);
+    letter-spacing:-0.01em;
+    margin-bottom:0.5rem;
+}
+
+
+/* Navigation */
+nav ul{
+    list-style:none;
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:center;
+    gap:6px;
+}
+
+nav li{
+    margin:0;
+}
+
+nav a{
+    color:rgba(255,255,255,0.8);
+    text-decoration:none;
+    font-size:0.85rem;
+    font-weight:600;
+    padding:0.4rem 0.75rem;
+    border-radius:20px;
+    transition:background 0.2s, color 0.2s;
+    display:inline-block;
+}
+
+nav a:hover{
+    background:rgba(255,255,255,0.12);
+    color:white;
+}
+
+nav a:focus{
+    outline:3px solid #60a5fa;
+    outline-offset:2px;
+}
+
+nav a.active-link{
+    background:var(--blue);
+    color:white;
+}
+
+
+/* Sections — soft background tint per section, no border accent */
+section{
+    background:var(--card-bg);
+    margin:1rem;
+    padding:1.25rem;
+    border-radius:12px;
+    box-shadow:0 1px 3px rgba(0,0,0,0.06);
+    /* generous scroll-margin so a sticky header of ANY height
+       never covers the heading when a nav link is clicked */
+    scroll-margin-top:100px;
+    /* never let a section's own content force the page wider
+       than the viewport */
+    max-width:100%;
+    overflow-x:auto;
+}
+
+section h2{
+    font-size:clamp(1rem, 3.5vw, 1.15rem);
+    letter-spacing:-0.01em;
+    margin-bottom:0.85rem;
+    color:var(--navy);
+}
+
+/* dark blue + pale white per section, no colored edge */
+
+#about{
+    background:#f8fafc;
+}
+
+#dashboard{
+    background:#f8fafc;
+}
+
+#form-section{
+    background:#eef2f7;
+}
+
+#records{
+    background:#f8fafc;
+}
+
+#settings{
+    background:#eef2f7;
+}
+/* Dashboard cards */
+.dashboard-grid{
+    display:grid;
+    grid-template-columns:1fr;
+    gap:0.85rem;
+}
+
+.card{
+    background:#f8f9fb;
+    border:1px solid var(--border);
+    padding:1rem 1.1rem;
+    border-radius:10px;
+    text-align:center;
+    transition:transform 0.2s, box-shadow 0.2s;
+    /* belt-and-suspenders: a card can never be wider
+       than its grid cell, even with long content inside */
+    min-width:0;
+}
+
+.card h3{
+    font-size:0.78rem;
+    font-weight:600;
+    text-transform:uppercase;
+    letter-spacing:0.05em;
+    color:#6b7280;
+    margin-bottom:0.4rem;
+}
+
+.card p{
+    font-size:clamp(1.1rem, 4vw, 1.4rem);
+    font-weight:700;
+    color:var(--navy);
+    word-break:break-word;
+}
+
+.card:has(#budget-cap){
+    background:#eff4ff;
+}
+
+.card:has(#budget-cap) h3{
+    color:var(--blue-dark);
+}
+
+.card:hover{
+    transform: translateY(-3px);
+    box-shadow:0 6px 16px rgba(0,0,0,0.08);
+}
+
+
+/* Form */
+form{
+    display:flex;
+    flex-direction:column;
+    background:#fafbfc;
+    border:1px solid var(--border);
+    border-radius:10px;
+    padding:1.25rem 1.25rem 0.5rem;
+}
+
+form label{
+    font-size:0.82rem;
+    font-weight:600;
+    color:#4b5563;
+    margin-bottom:0.3rem;
+}
+
+input{
+    padding:10px 12px;
+    margin-bottom:5px;
+    border:1.5px solid var(--border);
+    border-radius:7px;
+    font-size:0.95rem;
+    background:white;
+    transition:border-color 0.15s;
+    width:100%;
+}
+
+input:hover{
+    border-color:#c7cbd4;
+}
+
+button{
+    padding:12px;
+    border:none;
+    background:var(--blue);
+    color:white;
+    cursor:pointer;
+    margin-bottom:10px;
+    border-radius:7px;
+    font-weight:600;
+    font-size:0.92rem;
+    transition:0.2s;
+    width:100%;
+}
+
+button:hover{
+    background:var(--blue-dark);
+    transform:scale(1.02);
+}
+
+#cancel-edit-btn{
+    background:#6b7280;
+}
+
+#cancel-edit-btn:hover{
+    background:#4b5563;
+}
+
+
+/* per-field error messages */
+.field-error{
+    color:var(--red);
+    font-size:0.82rem;
+    display:block;
+    margin-bottom:10px;
+    min-height:1.1em;
+    font-weight:500;
+}
+
+input.input-error{
+    border-color:var(--red);
+    background:var(--red-bg);
+}
+
+
+/* Table — scrolls horizontally on its own if it has to,
+   instead of forcing the whole page to overflow */
+.table-wrap{
+    overflow-x:auto;
+    -webkit-overflow-scrolling:touch;
+    width:100%;
+}
+
+table{
+    width:100%;
+    min-width:480px;
+    border-collapse:collapse;
+    font-size:0.88rem;
+}
+
+th,
+td{
+    border:1px solid var(--border);
+    padding:8px 10px;
+    white-space:nowrap;
+}
+
+th{
+    background:var(--navy);
+    color:white;
+    font-size:0.75rem;
+    text-transform:uppercase;
+    letter-spacing:0.04em;
+    font-weight:600;
+}
+
+td{
+    background:white;
+}
+
+tbody tr:nth-child(even) td{
+    background:#fafbfc;
+}
+
+td button{
+    padding:6px 12px;
+    font-size:0.82rem;
+    margin:2px 4px 2px 0;
+    width:auto;
+    display:inline-block;
+}
+
+.delete-btn{
+    background:#6b7280;
+}
+
+.delete-btn:hover{
+    background:var(--red);
+}
+
+tr{
+    transition: background-color 0.2s;
+}
+
+tr:hover td{
+    background-color: #eef2ff;
+}
+
+
+/* Footer */
+footer{
+    background:var(--navy);
+    color:rgba(255,255,255,0.7);
+    text-align:center;
+    padding:1rem;
+    font-size:0.85rem;
+}
+
+
+/* status + budget messages */
+#status-message{
+    color:var(--red);
+    font-weight:600;
+    margin-bottom:15px;
+    padding:0.6rem 0.85rem;
+    background:var(--red-bg);
+    border-radius:7px;
+    font-size:0.9rem;
+    word-break:break-word;
+}
+
+#status-message:empty{
+    display:none;
+}
+
+#budget-status{
+    display:inline-block;
+    padding:0.45rem 0.8rem;
+    border-radius:7px;
+    font-weight:600;
+    font-size:0.9rem;
+    margin-top:0.3rem;
+}
+
+#budget-status.budget-ok{
+    background:var(--green-bg);
+    color:var(--green);
+}
+
+#budget-status.budget-over{
+    background:var(--red-bg);
+    color:var(--red);
+}
+
+
+/* trend chart */
+#trend-chart{
+    margin-top:15px;
+    width:100%;
+    overflow-x:auto;
+}
+
+.bar-row{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    margin-bottom:10px;
+    font-size:0.85rem;
+}
+
+.bar-row span{
+    width:32px;
+    flex-shrink:0;
+    color:#6b7280;
+    font-weight:600;
+}
+
+.bar{
+    height:18px;
+    background:linear-gradient(90deg, var(--blue), #60a5fa);
+    border-radius:4px;
+    transition:0.3s;
+    min-width:2px;
+    max-width:100%;
+}
+
+
+/* focus visibility */
+button:focus,
+input:focus,
+select:focus,
+a:focus{
+    outline: 3px solid #2563eb;
+    outline-offset: 2px;
+}
+
+
+/* ───────────────────────────────
+   BREAKPOINTS
+   mobile-first base styles above,
+   then tablet, then desktop
+─────────────────────────────── */
+
+@media (min-width:768px){
+
+    header{
+        padding:0.85rem 1.5rem;
+    }
+
+    nav a{
+        font-size:0.9rem;
+        padding:0.45rem 1rem;
+    }
+
+    section{
+        margin:1.25rem 1.5rem;
+        padding:1.5rem;
+    }
+
+    .dashboard-grid{
+        grid-template-columns:repeat(2,1fr);
+        gap:1.25rem;
+    }
+
+    form{
+        max-width:600px;
+        margin:0 auto;
+    }
+
+    button{
+        width:auto;
+        min-width:180px;
+        align-self:flex-start;
+    }
+
+    td button{
+        width:auto;
+    }
+
+}
+
+@media (min-width:1024px){
+
+    section{
+        margin:1.5rem 2rem;
+        padding:1.75rem 2rem;
+    }
+
+    .dashboard-grid{
+        grid-template-columns:repeat(3,1fr);
+    }
+
+}
+
+
+/* respects users who have motion sensitivity turned on */
+@media (prefers-reduced-motion: reduce){
+
+    *{
+        transition-duration: 0.01ms !important;
+        animation-duration: 0.01ms !important;
+    }
+
+}

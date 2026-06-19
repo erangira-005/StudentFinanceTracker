@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Finance Tracker</title>
+
+    <link rel="stylesheet" href="styles/style.css">
+</head>
+<body>
+
+<a href="#main-content" class="skip-link">
+    Skip to content
+</a>
+
+<header>
+
+    <h1>Student Finance Tracker</h1>
+
+    <nav>
+
+        <ul>
+
+            <li><a href="#about">About</a></li>
+
+            <li><a href="#dashboard">Dashboard</a></li>
+
+            <li><a href="#form-section">Add</a></li>
+
+            <li><a href="#records">Records</a></li>
+
+            <li><a href="#settings">Settings</a></li>
+
+        </ul>
+
+    </nav>
+
+</header>
+
+
+<main id="main-content">
+
+    <section id="about">
+
+    <h2>About</h2>
+
+    <p>
+        Student Finance Tracker is a lightweight web app built to help students
+        track day-to-day spending, set a monthly budget, and spot patterns in
+        where their money actually goes. It supports multiple currencies,
+        regex-powered search across transactions, and works fully offline using
+        local storage — no account or server required.
+    </p>
+
+    <p>
+        Built with vanilla HTML, CSS and JavaScript as part of a Building
+        Responsive UI assignment, focused on accessibility, mobile-first design,
+        and clean modular code.
+    </p>
+
+    <p>Email: <a href="me.rangira@alustudent.com">e.rangira@alustudent.com</a></p>
+
+    <p>GitHub: <a href="https://github.com/erangira-005" target="_blank" rel="noopener">https://github.com/erangira-005</a></p>
+
+</section>
+
+
+    <section id="dashboard">
+
+        <h2>Dashboard</h2>
+
+        <div class="dashboard-grid">
+
+            <div class="card">
+                <h3>Total Transactions</h3>
+                <p id="total-records">0</p>
+            </div>
+
+            <div class="card">
+                <h3>Total Spending</h3>
+                <p id="total-amount">$0</p>
+            </div>
+
+            <div class="card">
+                <h3>Top Category</h3>
+                <p id="top-category">None</p>
+            </div>
+
+
+           <div class="card">
+
+    <h3>Budget Cap</h3>
+
+    <label for="budget-cap" class="sr-only">Budget cap amount</label>
+
+    <input
+        type="number"
+        id="budget-cap"
+        placeholder="Enter budget"
+        min="0"
+        step="0.01">
+
+    <p
+        id="budget-status"
+        role="status"
+        aria-live="polite">
+        No budget set.
+    </p>
+
+</div>
+
+           <div class="card">
+
+    <h3>Last 7 Days Trend</h3>
+
+    <div id="trend-chart">
+
+    </div>
+
+</div>          
+
+        </div>
+
+    </section>
+
+
+    <section id="form-section">
+
+        <h2 id="form-heading">Add Transaction</h2>
+
+         <div
+id="status-message"
+role="status"
+aria-live="polite">
+</div>
+        
+        <form id="transaction-form" novalidate>
+
+            <label for="description">
+                Description
+            </label>
+
+            <input
+                type="text"
+                id="description"
+                required
+                aria-describedby="description-error"
+                aria-invalid="false">
+
+            <span id="description-error" class="field-error" role="alert"></span>
+
+            <label for="amount">
+                Amount
+            </label>
+
+            <input
+                type="number"
+                id="amount"
+                required
+                min="0"
+                step="0.01"
+                aria-describedby="amount-error"
+                aria-invalid="false">
+
+            <span id="amount-error" class="field-error" role="alert"></span>
+
+            <label for="category">
+                Category
+            </label>
+
+            <input
+                type="text"
+                id="category"
+                required
+                aria-describedby="category-error"
+                aria-invalid="false">
+
+            <span id="category-error" class="field-error" role="alert"></span>
+
+            <label for="date">
+                Date
+            </label>
+
+            <input
+                type="date"
+                id="date"
+                required
+                aria-describedby="date-error"
+                aria-invalid="false">
+
+            <span id="date-error" class="field-error" role="alert"></span>
+
+            <button type="submit" id="submit-btn">
+                Add Transaction
+            </button>
+
+            <button type="button" id="cancel-edit-btn" hidden>
+                Cancel Edit
+            </button>
+
+        </form>
+
+    </section>
+
+
+    <section id="records">
+
+        
+
+<h2>Records</h2>
+
+<label for="search">
+
+    Search Pattern
+
+</label>
+
+<input
+type="text"
+id="search"
+aria-describedby="search-error">
+
+<span id="search-error" class="field-error" role="alert"></span>
+
+<br><br>
+
+<label>
+
+<input
+type="checkbox"
+id="case-insensitive"
+checked>
+
+Case Insensitive
+
+</label>
+
+<br><br>
+
+<label for="sort-select" class="sr-only">Sort records by</label>
+
+<select id="sort-select">
+
+<option value="date">
+Date
+</option>
+
+<option value="description">
+Description
+</option>
+
+<option value="amount">
+Amount
+</option>
+
+</select>
+
+
+
+        <table>
+
+            <thead>
+
+                <tr>
+                    <th>Description</th>
+                    <th>Amount</th>
+                    <th>Category</th>
+                    <th>Date</th>
+                    <th>Actions</th>
+                </tr>
+
+            </thead>
+
+            <tbody id="table-body">
+
+            </tbody>
+
+        </table>
+
+    </section>
+
+
+   <section id="settings">
+
+    <h2>Settings</h2>
+
+    <label for="currency">
+        Currency
+    </label>
+
+    <select id="currency">
+
+        <option value="USD">
+            USD
+        </option>
+
+        <option value="EUR">
+            EUR
+        </option>
+
+        <option value="RWF">
+            RWF
+        </option>
+
+    </select>
+
+    <br><br>
+
+    <label for="eur-rate">
+        EUR Rate
+    </label>
+
+    <input
+        type="number"
+        id="eur-rate"
+        value="0.85"
+        step="0.01"
+        min="0.01">
+
+    <br><br>
+
+    <label for="rwf-rate">
+        RWF Rate
+    </label>
+
+    <input
+        type="number"
+        id="rwf-rate"
+        value="1450"
+        step="1"
+        min="1">
+
+<br><br>
+
+<button id="export-btn">
+    Export JSON
+</button>
+
+<br><br>
+
+<label for="import-file" class="sr-only">Choose a JSON file to import</label>
+
+<input
+    type="file"
+    id="import-file"
+    accept=".json">
+
+<button id="import-btn">
+    Import JSON
+</button>
+
+</section>
+
+</main>
+
+
+<footer>
+
+    <p>
+        Student Finance Tracker © 2026
+    </p>
+
+</footer>
+
+<script type="module" src="scripts/app.js"></script>
+
+</body>
+</html>
