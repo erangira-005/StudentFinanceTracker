@@ -2,9 +2,9 @@
 
 A responsive, accessible web app for tracking student expenses, built with vanilla HTML, CSS and JavaScript.
 
-**Live demo:** [https://your-github-name.github.io/your-repo-name/](https://your-github-name.github.io/your-repo-name/)
-*(update this link once deployed to GitHub Pages)*
-
+**Live demo:** https://erangira-005.github.io/StudentFinanceTracker/
+**Repository:** https://github.com/erangira-005/StudentFinanceTracker
+**Demo Video:** https://www.loom.com/share/1d0880719d594d829dece6e36cc6d26f
 ---
 
 ## Theme
@@ -54,7 +54,7 @@ Search checks the **description, category, date, and amount** fields, and only s
 | `Enter` | Submit the active form / activate the focused button or link |
 | `Tab` (first press on page load) | Reveals the "Skip to content" link |
 
-All interactive elements have a visible focus outline. The skip link lets keyboard users jump straight past the header/nav into the main content.
+All interactive elements have a visible focus outline. The skip link lets keyboard users jump straight past the header/nav into the main content. The nav also highlights whichever section is currently scrolled into view, so keyboard and mouse users alike always know where they are on the page.
 
 ---
 
@@ -69,6 +69,8 @@ All interactive elements have a visible focus outline. The skip link lets keyboa
 - Visible focus outline on every input, button, and link
 - Tested and confirmed responsive at three breakpoints: ~360–430px (mobile), 768px (tablet), and 1024px+ (desktop) — nav, dashboard grid, and table all adapt correctly at each size
 - Respects `prefers-reduced-motion` for users with motion sensitivity
+
+See [`a11y-plan.md`](./a11y-plan.md) for the full reasoning behind these decisions.
 
 ---
 
@@ -87,6 +89,8 @@ All interactive elements have a visible focus outline. The skip link lets keyboa
 ```
 
 Default categories: Food, Books, Transport, Entertainment, Fees (freely editable by typing any category name in the form).
+
+See [`data-model.md`](./data-model.md) for full field-by-field documentation.
 
 ---
 
@@ -119,3 +123,58 @@ Open `tests.html` in the browser (served the same way as above). It runs a set o
 ---
 
 ## File Structure
+
+├── index.html
+
+├── tests.html
+
+├── seed.json
+
+├── README.md
+
+├── data-model.md
+
+├── a11y-plan.md
+
+├── WIREFRAME.md
+
+├── styles/
+
+│   └── style.css
+
+└── scripts/
+
+├── app.js              entry point — wires up event listeners, active-nav-link tracking
+
+├── state.js            holds the transactions array
+
+├── storage.js          localStorage save/load
+
+├── validators.js       4 regex rules + advanced back-reference rule
+
+├── search.js           safe regex compiler, highlight, filter
+
+├── ui.js                renders the table, handles edit/delete
+
+├── dashboard.js        stats, budget cap, 7-day trend chart
+
+├── currency.js          currency conversion logic
+
+└── importValidator.js  validates structure of imported JSON
+
+
+## Notes
+
+- Sample data is provided in `seed.json` — import it via Settings → Import JSON to quickly populate the app with test records.
+- All data is stored in the browser's `localStorage` under the key `finance-data`. Clearing browser storage will reset the app.
+
+## References
+
+This project was built independently as coursework, with the following resources consulted for specific implementation patterns:
+
+- [W3Schools — CSS Position: Sticky](https://www.w3schools.com/howto/howto_css_sticky_navbar.asp) — referenced for the sticky header navigation pattern
+- [W3Schools — HTML5 Web Storage API](https://www.w3schools.com/html/html5_webstorage.asp) — referenced for the `localStorage` save/load pattern used in `storage.js`
+- [W3Schools — JavaScript File API](https://www.w3schools.com/jsref/api_file.asp) — referenced for the `FileReader` pattern used when importing JSON
+- [W3Schools — CSS RWD Media Queries](https://www.w3schools.com/css/css_rwd_mediaqueries.asp) — referenced for the responsive breakpoint structure
+
+AI assistance (Claude) was used to help structure and word this README file, and to review/debug code I had already written. All core logic, validation rules, and feature implementation are my own work.
