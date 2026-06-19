@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Tests</title>
+    <style>
+        body{ font-family: Arial, sans-serif; max-width: 700px; margin: 2rem auto; }
+        .pass{ color: green; }
+        .fail{ color: red; font-weight: bold; }
+        .test{ padding: 4px 0; }
+        #summary{ margin-top: 1.5rem; padding: 1rem; font-weight: bold; border-radius: 6px; }
+        .all-pass{ background: #dcfce7; color: #166534; }
+        .has-fail{ background: #fee2e2; color: #991b1b; }
+    </style>
+</head>
+
+<body>
+
+<h1>Validator Tests</h1>
+
+<div id="results"></div>
+<div id="summary"></div>
+
+<script type="module">
+
+import {
+    validateDescription,
+    validateAmount,
+    validateDate,
+    validateCategory,
+    hasDuplicateWords
+} from "./scripts/validators.js";
+
+import { compileRegex, highlight } from "./scripts/search.js";
+
+import { isValidTransaction } from "./scripts/importValidator.js";
+
+let passed = 0;
+let failed = 0;
+
+const results = document.getElementById("results");
+
+function assert(label, condition){
+
+    const div = document.createElement("div");
+
+    div.className = "test";
+
+    if(condition){
+
+        div.innerHTML = `<span class="pass">PASS</span> - ${label}`;
+
+        passed++;
+
+    }
+    else{
+
+        div.innerHTML = `<span class="fail">FAIL</span> - ${label}`;
+
+        failed++;
+
+    }
+
+    results.appendChild(div);
+
+}
+
+
+// description
+assert('validateDescription("Coffee") is true', validateDescription("Coffee") === true);
+assert('validateDescription(" Coffee ") is false (leading/trailing space)', validateDescription(" Coffee ") === false);
+assert('validateDescription("") is false (empty)', validateDescription("") === false);
+
+// amount
+assert('validateAmount("12.50") is true', validateAmount("12.50") === true);
+assert('validateAmount("12.555") is false (3 decimals)', validateAmount("12.555") === false);
+assert('validateAmount("012") is false (leading zero)', validateAmount("012") === false);
+assert('validateAmount("0") is true', validateAmount("0") === true);
+
+// date
+assert('validateDate("2026-06-19") is true', validateDate("2026-06-19") === true);
+assert('validateDate("2026-13-40") is false (bad month/day)', validateDate("2026-13-40") === false);
+assert('validateDate("19-06-2026") is false (wrong format)', validateDate("19-06-2026") === false);
+
+// category
+assert('validateCategory("Food") is true', validateCategory("Food") === true);
+assert('validateCategory("Food123") is false (numbers not allowed)', validateCategory("Food123") === false);
+assert('validateCategory("Eating Out") is true (spaces allowed)', validateCategory("Eating Out") === true);
+
+// advanced regex - duplicate words / back-reference
+assert('hasDuplicateWords("coffee coffee") is true', hasDuplicateWords("coffee coffee") === true);
+assert('hasDuplicateWords("coffee tea") is false', hasDuplicateWords("coffee tea") === false);
+assert('hasDuplicateWords("Coffee coffee") is true (case-insensitive)', hasDuplicateWords("Coffee coffee") === true);
+
+// safe regex compiler
+assert('compileRegex("food") returns a RegExp', compileRegex("food") instanceof RegExp);
+assert('compileRegex("[") returns null (invalid pattern, no crash)', compileRegex("[") === null);
+assert('compileRegex("") returns null (empty pattern)', compileRegex("") === null);
+
+// highlight
+const re = compileRegex("coffee", "gi");
+assert('highlight wraps match in <mark>', highlight("Coffee time", re).includes("<mark>"));
+assert('highlight returns plain text when re is null', highlight("Coffee time", null) === "Coffee time");
+
+// import validation
+assert('isValidTransaction accepts a full valid record', isValidTransaction({
+    id: "txn_1",
+    description: "Coffee",
+    amount: 5,
+    category: "Food",
+    date: "2026-06-19",
+    createdAt: "2026-06-19T10:00:00Z",
+    updatedAt: "2026-06-19T10:00:00Z"
+}) === true);
+
+assert('isValidTransaction rejects missing date', isValidTransaction({
+    id: "txn_1",
+    description: "Coffee",
+    amount: 5,
+    category: "Food",
+    createdAt: "2026-06-19T10:00:00Z",
+    updatedAt: "2026-06-19T10:00:00Z"
+}) === false);
+
+assert('isValidTransaction rejects negative amount', isValidTransaction({
+    id: "txn_1",
+    description: "Coffee",
+    amount: -5,
+    category: "Food",
+    date: "2026-06-19",
+    createdAt: "2026-06-19T10:00:00Z",
+    updatedAt: "2026-06-19T10:00:00Z"
+}) === false);
+
+assert('isValidTransaction rejects bad date format', isValidTransaction({
+    id: "txn_1",
+    description: "Coffee",
+    amount: 5,
+    category: "Food",
+    date: "19-06-2026",
+    createdAt: "2026-06-19T10:00:00Z",
+    updatedAt: "2026-06-19T10:00:00Z"
+}) === false);
+
+
+// summary
+const summary = document.getElementById("summary");
+const total = passed + failed;
+
+summary.className = failed === 0 ? "all-pass" : "has-fail";
+
+summary.textContent = `${passed}/${total} tests passed` +
+    (failed > 0 ? ` (${failed} failed)` : " - all good!");
+
+</script>
+
+</body>
+</html>
