@@ -1,62 +1,242 @@
-DESKTOP / TABLET LAYOUT (768px+)
-┌──────────────────────────────────────────────────┐
-│              STUDENT FINANCE TRACKER              │  ← sticky header
-│   About   Dashboard   Add   Records   Settings    │  ← nav (pill links)
-└──────────────────────────────────────────────────┘
+┌────────────────────────────────────────────────────────────┐
 
-┌──────────────────────────────────────────────────┐
-│  ABOUT                                            │
-│  Purpose paragraph...                             │
-│  Email: ...   GitHub: ...                         │
-└──────────────────────────────────────────────────┘
+│                  STUDENT FINANCE TRACKER                   │  ← sticky header
 
-┌──────────────────────────────────────────────────┐
-│  DASHBOARD                                        │
-│  ┌──────────┐ ┌──────────┐ ┌──────────┐          │
-│  │  Total   │ │  Total   │ │   Top    │          │  ← 3-col grid
-│  │  Trans.  │ │  Spend   │ │ Category │          │     at 1024px+
-│  └──────────┘ └──────────┘ └──────────┘          │
-│  ┌──────────┐ ┌──────────────────────┐           │
-│  │  Budget  │ │   7-Day Trend Chart  │           │
-│  │   Cap    │ │   (bar rows)         │           │
-│  └──────────┘ └──────────────────────┘           │
-└──────────────────────────────────────────────────┘
+│    About    Dashboard    Add    Records    Settings        │  ← nav (pill links)
 
-┌──────────────────────────────────────────────────┐
-│  ADD TRANSACTION                                  │
-│  [Description input]                              │
-│  [Amount input]                                    │
-│  [Category input]                                  │
-│  [Date input]                                      │
-│  [ Add Transaction ]  [ Cancel Edit (hidden) ]    │
-└──────────────────────────────────────────────────┘
+└────────────────────────────────────────────────────────────┘
+┌────────────────────────────────────────────────────────────┐
 
-┌──────────────────────────────────────────────────┐
-│  RECORDS                                          │
-│  [ Search Pattern input ]  ☐ Case Insensitive     │
-│  [ Sort: Date ▾ ]                                 │
-│  ┌────────────────────────────────────────────┐   │
-│  │ Desc │ Amount │ Category │ Date │ Actions  │   │
-│  ├────────────────────────────────────────────┤   │
-│  │ ...row...                  [Edit] [Delete] │   │
-│  └────────────────────────────────────────────┘   │
-└──────────────────────────────────────────────────┘
+│  ABOUT                                                      │
 
-┌──────────────────────────────────────────────────┐
-│  SETTINGS                                         │
-│  Currency [USD ▾]  EUR rate [__]  RWF rate [__]   │
-│  [ Export JSON ]  [ Choose file ] [ Import JSON ] │
-└──────────────────────────────────────────────────┘
+│  ─────                                                       │
 
-┌──────────────────────────────────────────────────┐
-│         Student Finance Tracker © 2026            │  ← footer
-└──────────────────────────────────────────────────┘
+│  Purpose paragraph describing the app...                    │
 
+│  Email: name@email.com     GitHub: github.com/username      │
 
-MOBILE LAYOUT (~360-430px)
-- Same vertical order, top to bottom
-- Header nav links wrap to 2 rows instead of 1
-- Dashboard cards stack to 1 column instead of 3
-- Form inputs and buttons go full-width
-- Table scrolls horizontally inside its own box if needed,
-  rest of the page stays put (no full-page sideways scroll)
+└────────────────────────────────────────────────────────────┘
+┌────────────────────────────────────────────────────────────┐
+
+│  DASHBOARD                                                   │
+
+│  ──────────                                                   │
+
+│  ┌────────────┐  ┌────────────┐  ┌────────────┐             │
+
+│  │   Total    │  │   Total    │  │    Top     │             │  ← 3-column
+
+│  │Transactions│  │  Spending  │  │  Category  │             │     grid
+
+│  └────────────┘  └────────────┘  └────────────┘             │
+
+│  ┌────────────┐  ┌─────────────────────────────┐             │
+
+│  │   Budget   │  │     Last 7 Days Trend        │             │
+
+│  │    Cap     │  │     (bar chart rows)         │             │
+
+│  │  [input]   │  │  Sun ▓▓▓                     │             │
+
+│  │  status    │  │  Mon ▓▓▓▓▓                   │             │
+
+│  └────────────┘  └─────────────────────────────┘             │
+
+└────────────────────────────────────────────────────────────┘
+┌────────────────────────────────────────────────────────────┐
+
+│  ADD TRANSACTION                                             │
+
+│  ────────────────                                             │
+
+│  Description  []               │
+
+│  Amount       []               │
+
+│  Category     []               │
+
+│  Date         []               │
+
+│                                                                │
+
+│  [ Add Transaction ]   [ Cancel Edit ]  (cancel hidden        │
+
+│                                           until editing)       │
+
+└────────────────────────────────────────────────────────────┘
+┌────────────────────────────────────────────────────────────┐
+
+│  RECORDS                                                      │
+
+│  ───────                                                       │
+
+│  Search Pattern [___________________]   ☐ Case Insensitive   │
+
+│  Sort by [ Date ▾ ]                                            │
+
+│                                                                │
+
+│  ┌──────────┬────────┬──────────┬──────────┬───────────────┐ │
+
+│  │Description│ Amount │ Category │   Date   │   Actions     │ │
+
+│  ├──────────┼────────┼──────────┼──────────┼───────────────┤ │
+
+│  │  Coffee   │ $5.00  │   Food   │2026-06-19│ [Edit][Delete]│ │
+
+│  │  Bus Pass │ $20.00 │Transport │2026-06-18│ [Edit][Delete]│ │
+
+│  └──────────┴────────┴──────────┴──────────┴───────────────┘ │
+
+└────────────────────────────────────────────────────────────┘
+┌────────────────────────────────────────────────────────────┐
+
+│  SETTINGS                                                     │
+
+│  ────────                                                      │
+
+│  Currency [ USD ▾ ]   EUR rate []   RWF rate []      │
+
+│                                                                │
+
+│  [ Export JSON ]    [ Choose File ]  [ Import JSON ]         │
+
+└────────────────────────────────────────────────────────────┘
+┌────────────────────────────────────────────────────────────┐
+
+│              Student Finance Tracker © 2026                  │  ← footer
+
+└────────────────────────────────────────────────────────────┘
+
+### Mobile (~360–430px)
+┌──────────────────────┐
+
+│  STUDENT FINANCE      │  ← sticky header,
+
+│      TRACKER          │     title wraps
+
+│ About Dashboard Add   │  ← nav wraps to
+
+│   Records  Settings   │     2 rows
+
+└──────────────────────┘
+┌──────────────────────┐
+
+│  ABOUT                 │
+
+│  Purpose paragraph...  │
+
+│  Email / GitHub links  │
+
+└──────────────────────┘
+┌──────────────────────┐
+
+│  DASHBOARD             │
+
+│  ┌──────────────────┐ │
+
+│  │Total Transactions│ │  ← cards stack
+
+│  └──────────────────┘ │     to 1 column
+
+│  ┌──────────────────┐ │
+
+│  │  Total Spending  │ │
+
+│  └──────────────────┘ │
+
+│  ┌──────────────────┐ │
+
+│  │   Top Category   │ │
+
+│  └──────────────────┘ │
+
+│  ┌──────────────────┐ │
+
+│  │   Budget Cap      │ │
+
+│  │   [input]          │ │
+
+│  │   status pill      │ │
+
+│  └──────────────────┘ │
+
+│  ┌──────────────────┐ │
+
+│  │  7-Day Trend       │ │
+
+│  │  Sun ▓▓▓           │ │
+
+│  │  Mon ▓▓▓▓▓         │ │
+
+│  └──────────────────┘ │
+
+└──────────────────────┘
+┌──────────────────────┐
+
+│  ADD TRANSACTION       │
+
+│  Description           │
+
+│  []    │
+
+│  Amount                 │
+
+│  []    │
+
+│  Category               │
+
+│  []    │
+
+│  Date                   │
+
+│  []    │
+
+│  [ Add Transaction  ]  │  ← full width
+
+└──────────────────────┘
+┌──────────────────────┐
+
+│  RECORDS               │
+
+│  Search [__________]   │
+
+│  ☐ Case Insensitive    │
+
+│  Sort [ Date ▾ ]       │
+
+│  ┌──────────────────┐ │
+
+│  │ table scrolls      │ │  ← horizontal
+
+│  │ sideways inside    │ │     scroll, page
+
+│  │ its own box if     │ │     itself stays
+
+│  │ needed             │ │     put
+
+│  └──────────────────┘ │
+
+└──────────────────────┘
+┌──────────────────────┐
+
+│  SETTINGS               │
+
+│  Currency [ USD ▾ ]     │
+
+│  EUR rate []      │
+
+│  RWF rate []      │
+
+│  [ Export JSON ]        │
+
+│  [ Choose File ]        │
+
+│  [ Import JSON ]        │
+
+└──────────────────────┘
+┌──────────────────────┐
+
+│  © 2026                 │
+
+└──────────────────────┘
