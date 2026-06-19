@@ -4,7 +4,7 @@ A responsive, accessible web app for tracking student expenses, built with vanil
 
 **Live demo:** https://erangira-005.github.io/StudentFinanceTracker/
 **Repository:** https://github.com/erangira-005/StudentFinanceTracker
-## Demo Video:** https://www.loom.com/share/1d0880719d594d829dece6e36cc6d26f
+**Demo Video:** https://www.loom.com/share/1d0880719d594d829dece6e36cc6d26f
 ---
 
 ## Theme
