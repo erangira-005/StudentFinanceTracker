@@ -239,7 +239,7 @@ form label{
     margin-bottom:0.3rem;
 }
 
-input{
+input:not([type="checkbox"]){
     padding:10px 12px;
     margin-bottom:5px;
     border:1.5px solid var(--border);
@@ -250,8 +250,16 @@ input{
     width:100%;
 }
 
-input:hover{
+input:not([type="checkbox"]):hover{
     border-color:#c7cbd4;
+}
+
+input[type="checkbox"]{
+    width:16px;
+    height:16px;
+    margin:0 6px 0 0;
+    vertical-align:middle;
+    cursor:pointer;
 }
 
 button{
