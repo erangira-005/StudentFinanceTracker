@@ -4,7 +4,7 @@ A responsive, accessible web app for tracking student expenses, built with vanil
 
 **Live demo:** https://erangira-005.github.io/StudentFinanceTracker/
 **Repository:** https://github.com/erangira-005/StudentFinanceTracker
-
+## Demo Video:** https://www.loom.com/share/1d0880719d594d829dece6e36cc6d26f
 ---
 
 ## Theme
@@ -123,3 +123,58 @@ Open `tests.html` in the browser (served the same way as above). It runs a set o
 ---
 
 ## File Structure
+
+├── index.html
+
+├── tests.html
+
+├── seed.json
+
+├── README.md
+
+├── data-model.md
+
+├── a11y-plan.md
+
+├── WIREFRAME.md
+
+├── styles/
+
+│   └── style.css
+
+└── scripts/
+
+├── app.js              entry point — wires up event listeners, active-nav-link tracking
+
+├── state.js            holds the transactions array
+
+├── storage.js          localStorage save/load
+
+├── validators.js       4 regex rules + advanced back-reference rule
+
+├── search.js           safe regex compiler, highlight, filter
+
+├── ui.js                renders the table, handles edit/delete
+
+├── dashboard.js        stats, budget cap, 7-day trend chart
+
+├── currency.js          currency conversion logic
+
+└── importValidator.js  validates structure of imported JSON
+
+
+## Notes
+
+- Sample data is provided in `seed.json` — import it via Settings → Import JSON to quickly populate the app with test records.
+- All data is stored in the browser's `localStorage` under the key `finance-data`. Clearing browser storage will reset the app.
+
+## References
+
+This project was built independently as coursework, with the following resources consulted for specific implementation patterns:
+
+- [W3Schools — CSS Position: Sticky](https://www.w3schools.com/howto/howto_css_sticky_navbar.asp) — referenced for the sticky header navigation pattern
+- [W3Schools — HTML5 Web Storage API](https://www.w3schools.com/html/html5_webstorage.asp) — referenced for the `localStorage` save/load pattern used in `storage.js`
+- [W3Schools — JavaScript File API](https://www.w3schools.com/jsref/api_file.asp) — referenced for the `FileReader` pattern used when importing JSON
+- [W3Schools — CSS RWD Media Queries](https://www.w3schools.com/css/css_rwd_mediaqueries.asp) — referenced for the responsive breakpoint structure
+
+AI assistance (Claude) was used to help structure and word this README file, and to review/debug code I had already written. All core logic, validation rules, and feature implementation are my own work.
