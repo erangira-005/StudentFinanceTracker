@@ -2,8 +2,8 @@
 
 A responsive, accessible web app for tracking student expenses, built with vanilla HTML, CSS and JavaScript.
 
-**Live demo:** [https://your-github-name.github.io/your-repo-name/](https://your-github-name.github.io/your-repo-name/)
-*(update this link once deployed to GitHub Pages)*
+**Live demo:** https://erangira-005.github.io/StudentFinanceTracker/
+**Repository:** https://github.com/erangira-005/StudentFinanceTracker
 
 ---
 
@@ -54,7 +54,7 @@ Search checks the **description, category, date, and amount** fields, and only s
 | `Enter` | Submit the active form / activate the focused button or link |
 | `Tab` (first press on page load) | Reveals the "Skip to content" link |
 
-All interactive elements have a visible focus outline. The skip link lets keyboard users jump straight past the header/nav into the main content.
+All interactive elements have a visible focus outline. The skip link lets keyboard users jump straight past the header/nav into the main content. The nav also highlights whichever section is currently scrolled into view, so keyboard and mouse users alike always know where they are on the page.
 
 ---
 
@@ -69,6 +69,8 @@ All interactive elements have a visible focus outline. The skip link lets keyboa
 - Visible focus outline on every input, button, and link
 - Tested and confirmed responsive at three breakpoints: ~360–430px (mobile), 768px (tablet), and 1024px+ (desktop) — nav, dashboard grid, and table all adapt correctly at each size
 - Respects `prefers-reduced-motion` for users with motion sensitivity
+
+See [`a11y-plan.md`](./a11y-plan.md) for the full reasoning behind these decisions.
 
 ---
 
@@ -87,6 +89,8 @@ All interactive elements have a visible focus outline. The skip link lets keyboa
 ```
 
 Default categories: Food, Books, Transport, Entertainment, Fees (freely editable by typing any category name in the form).
+
+See [`data-model.md`](./data-model.md) for full field-by-field documentation.
 
 ---
 
